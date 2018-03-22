@@ -3,6 +3,9 @@ jobs:
    build:
      docker:
        - image: circleci/python:2.7
+       - image: circleci/python:2.7
+         entrypoint: env
      steps:
        - checkout
+       - run: env
        - run: echo "hello world"
