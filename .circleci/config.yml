@@ -6,3 +6,13 @@ jobs:
      steps:
        - checkout
        - run: echo "hello world"
+
+workflows:
+  version: 2
+  prtest:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - prtest
