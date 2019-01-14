@@ -12,5 +12,8 @@ jobs:
           name: Say hello to the world
           command: echo "Hello, World!"
        - run:
+          name: Add known_hosts fragment
+          command: echo 'vega,vega.entropyonwheels.com,45.76.116.21 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJKaOQsRHu8JJOEm8wwZdNfSDxqhFhJwK074DgTWiJjAy8ytCcNJDbumE0fyv6tpezs78Ky4lH7uK7ofqHwaQ5A=' >> ~/.ssh/known_hosts
+       - run:
           name: Try logging in with a key
           command: ssh testuser@vega.entropyonwheels.com w
