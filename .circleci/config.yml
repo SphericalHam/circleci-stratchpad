@@ -21,7 +21,7 @@ jobs:
           POSTGRES_USER: brringtestuser
           POSTGRES_DB: brringtest
           POSTGRES_PASSWORD: brringtestpassword
-        command: [--max_connections=500 ]
+        command: [--max_connections=567 ]
     parallelism: 1
     resource_class: large
 
