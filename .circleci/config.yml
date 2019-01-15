@@ -1,10 +1,31 @@
 version: 2
 jobs:
-   build:
-     docker:
-       - image: circleci/python
-     steps:
-       - checkout
-       - run:
-          name: Say hello to the world
-          command: echo "Hello, World!"
+  build:
+
+    working_directory: ~/brring
+
+    docker:
+      - image: circleci/python
+        environment:
+          MAVEN_OPTS: -Xmx3200m -Xms512m
+          JVM_OPTS: -Xmx3200m -Xms512m
+          JDBC_DATABASE_USERNAME: brringtestuser
+          JDBC_DATABASE_PASSWORD: brringtestpassword
+          JDBC_DATABASE_URL: jdbc:postgresql://localhost:5432/brringtest
+          PGUSER: brringtestuser
+          PGDATABASE: brringtest
+          PGPASSWORD: brringtestpassword
+          PGHOST: localhost
+      - image: circleci/postgres:latest-ram
+        environment:
+          POSTGRES_USER: brringtestuser
+          POSTGRES_DB: brringtest
+          POSTGRES_PASSWORD: brringtestpassword
+        command: [--max_connections=500 ]
+    parallelism: 1
+    resource_class: large
+
+    steps:
+      - run: sudo apt-get update
+      - run: sudo apt-get install postgresql-client
+      - run: psql -c "SHOW max_connections;"
